@@ -1,0 +1,58 @@
+
+                     
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">{{course.title}}</h4>
+                          </div>
+                          
+                            <div ng-show="error" class="text-center text-danger">
+                              <strong ng-bind="errorText"></strong>
+                            </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-md-10">
+                              <html>{{course.code}}</html>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-10">
+                               
+                               
+                                <span  class="label label-info">
+                                   {{course.duration}} - {{course.timeSlot}}
+                                </span>
+                                <div> Number of Classes: {{course.numberOfClasses}}</div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-md-8">
+                               <h5>Slots Available:</h5>
+
+                               <table class="col-md-8 table table-bordered table-hover">
+                                 <thead>
+                                   <tr role="row" class="heading">
+                                     <th> Day</th>
+                                     <th> Time </th>
+                                     <th> Action</th>
+                                   </tr>
+                                   </thead>
+                                   <tbody>
+                                   <tr ng-repeat="d in vm.daysOfweek" ng-if="availableSlots(course.timeSlot,d,course._id)" >
+                                   <td>{{d}}</td>
+                                    <td>{{course.timeSlot}}</td>
+                                    <td>
+                                      <button class="btn btn-warning" ng-disabled="course.complete" ng-click="vm.addToTimeTable(course,d,course._id)">Add</button>
+                                    </td>
+                                   </tr>
+                                 </tbody>
+                               </table>
+                               </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                      
+                          </div>
+                       
+                    </div>

@@ -1,0 +1,102 @@
+<section>
+  <div class="jumbotron text-center">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+       </div>
+    </div>
+    <br>
+    <div class="row">
+    
+      <p class="lead">
+       Course Planner </p>
+    </div>
+     <div class="well">
+   <label>TimeTable </label>
+
+     <div class="pull-right">
+
+   <strong >Total Credits: {{totalCredits}} </strong>
+    </div>
+    <!-- 
+   <a ng-click='vm.getTimeTable()'>Get Timetable</a> -->
+    <table class="table table-striped table-bordered table-hover" datatable="ng">
+                  <thead>
+                  <tr role="row" class="heading">
+                    <th width="2%">
+                      <input type="checkbox" class="group-checkable">
+                    </th>
+                    <th width="43%">
+                      Course Title
+                    </th>
+                    <th width="23%">
+                      Course Timing
+                    </th>
+                    <th width="20%">
+                      Day
+                    </th>
+                    <th width="15%">
+                     
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="tt in vm.timetable" >
+                    <th width="2%">
+                      <input type="checkbox" class="">
+                    </th>
+                    <td>
+                     {{tt.title}}
+                    </td>
+
+                    <td>{{tt.classStartTime}} :: {{tt.classEndTime}}</td>
+                    <td>
+                     {{tt.dayOfWeek}}
+                    </td>
+                    <td>
+                    <a ng-click="deleteTimetable(tt)"  ng-if="tt.user.status!='Published'" class="btn btn-danger btn-xs ">
+                    <i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>
+
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+    
+  </div>
+  <!-- 
+<div  ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="events"> -->
+<div id="mycalendar"></div>
+</section>
+<script type="text/javascript">
+	$(document).ready(function () {
+		console.log("IN EVENTS"+events);
+		$('#mycalendar').fullCalendar({
+		 height: 450,
+        header:{
+          center: 'TimeTable',
+        },
+        views: {
+        settimana: {
+             type: 'agenda',
+            duration: { days: 5 },
+            buttonText: '5 day',
+           
+            columnFormat: 'dddd', // Format the day to only show like 'Monday'
+            hiddenDays: [5,6] ,
+          firstHour: 8,
+          slotMinutes: "00:30",
+          minTime:"8:00",
+          maxTime:"18:00",
+          
+          allDaySlot:false,
+          // Hide Sunday and Saturday?
+        
+        },
+        timeFormat: 'HH:mm',
+      },
+        defaultView: 'settimana',
+        dayNames :[ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+         events:events,     
+
+});
+	});
+</script>
